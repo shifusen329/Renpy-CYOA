@@ -1,32 +1,30 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-KeyError: ('ivy', 'base')
+  File "game/live2d.rpy", line 119, in script
+    init python:
+  File "game/live2d.rpy", line 120, in <module>
+    def play_emotion_motion(emotion, character=ivy_live2d):
+                                               ^^^^^^^^^^  
+NameError: name 'ivy_live2d' is not defined
 
 -- Full Traceback ------------------------------------------------------------
 
 Traceback (most recent call last):
-  File "renpy/bootstrap.py", line 376, in bootstrap
-    renpy.main.main()
-    ~~~~~~~~~~~~~~~^^
-  File "renpy/main.py", line 614, in main
-    run(restart)
-    ~~~^^^^^^^^^
-  File "renpy/main.py", line 92, in run
-    if not renpy.arguments.post_init():
-           ~~~~~~~~~~~~~~~~~~~~~~~~~^^ 
-  File "renpy/arguments.py", line 355, in post_init
-    return commands[command]()
-           ~~~~~~~~~~~~~~~~~^^
-  File "renpy/lint.py", line 1150, in lint
-    check_image(node)
-    ~~~~~~~~~~~^^^^^^
-  File "renpy/lint.py", line 380, in check_image
-    check_displayable("image %s" % name, renpy.display.image.images[node.imgname])
-                                         ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^ 
-KeyError: ('ivy', 'base')
+  File "game/live2d.rpy", line 119, in script
+    init python:
+  File "renpy/ast.py", line 1187, in execute
+    renpy.python.py_exec_bytecode(self.code.bytecode, self.hide, store=self.store)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "renpy/python.py", line 1260, in py_exec_bytecode
+    exec(bytecode, globals, locals)
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "game/live2d.rpy", line 120, in <module>
+    def play_emotion_motion(emotion, character=ivy_live2d):
+                                               ^^^^^^^^^^  
+NameError: name 'ivy_live2d' is not defined
 
 Linux-6.8.0-78-generic-x86_64-with-glibc2.35 x86_64
 Ren'Py 8.4.1.25072401
  
-Fri Aug 29 21:56:48 2025
+Fri Aug 29 22:26:50 2025

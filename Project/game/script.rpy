@@ -89,6 +89,10 @@ label start:
                 
                 narrator "[gen_text]"
                 
+            "Test Live2D Integration":
+                system "Launching Live2D motion test scene..."
+                call live2d_test
+                
             "View infrastructure summary":
                 system "=== Phase 1 Infrastructure Summary ==="
                 system "✓ Configuration module (config.py)"
@@ -96,6 +100,11 @@ label start:
                 system "✓ Content-based caching (cache.py)"
                 system "✓ Save-compatible state management (state.py)"
                 system "✓ Ren'Py integration successful"
+                system "=== Phase 2 Live2D Integration ==="
+                system "✓ Live2D bridge module (live2d_bridge.py)"
+                system "✓ Emotion to motion mapping"
+                system "✓ Parameter control system"
+                system "✓ Motion test scene"
                 
             "Exit":
                 system "Infrastructure test complete!"

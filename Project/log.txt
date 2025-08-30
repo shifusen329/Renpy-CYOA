@@ -1,17 +1,15 @@
-2025-08-30 03:09:42 UTC
+2025-08-30 03:30:02 UTC
 Linux-6.8.0-78-generic-x86_64-with-glibc2.35
 Ren'Py 8.4.1.25072401
 
-Early init took 19 ms
+Early init took 20 ms
 Loading error handling took 7 ms
-Loading script took 33 ms
+Loading script took 31 ms
 Loading save slot metadata took 1 ms
 Loading persistent took 0 ms
-Live2D model found at: /home/administrator/python-share/renpy-8.4.1-sdk/Project/../Ivy/Ivy.model3.json
-Available motions: ['excited.motion3.json', 'shy.motion3.json', 'happy.motion3.json', 'neutral.motion3.json', 'hmph.motion3.json', 'dancing.motion3.json', 'upset.motion3.json', 'nervous.motion3.json', 'disagreement.motion3.json', 'idle.motion3.json']
-Running init code took 41 ms
+Running init code took 36 ms
 Loading analysis data took 1 ms
-Analyze and compile ATL took 0 ms
+Analyze and compile ATL took 1 ms
 Reloading save slot metadata took 1 ms
 Backing up script files to '/home/administrator/.renpy/backups/Project':
 Dump and make backups took 0 ms
@@ -24,19 +22,19 @@ Init translation took 0 ms
 Cleaning stores took 0 ms
 Load screen analysis took 0 ms
 Analyze screens took 3 ms
-Save screen analysis took 3 ms
-Save pyanalysis took 0 ms
+Save screen analysis took 4 ms
+Save pyanalysis took 1 ms
 Save bytecode took 12 ms
-﻿Ren'Py 8.4.1.25072401 lint report, generated at: Fri Aug 29 22:09:42 2025
+﻿Ren'Py 8.4.1.25072401 lint report, generated at: Fri Aug 29 22:30:02 2025
 It is advised to set config.check_conflicting_properties to True.
 
 
 Statistics:
 
-The game contains 26 dialogue blocks, containing 102 words and 785 characters,
-for an average of 3.9 words and 30 characters per block.
+The game contains 58 dialogue blocks, containing 220 words and 1,747
+characters, for an average of 3.8 words and 30 characters per block.
 
-The game contains 1 menus, 4 images, and 0 screens.
+The game contains 5 menus, 1 images, and 2 screens.
 
 
 Lint is not a substitute for thorough testing. Remember to update Ren'Py
