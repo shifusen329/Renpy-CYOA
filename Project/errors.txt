@@ -2,9 +2,23 @@
 errors listed below, and try again.
 
 
-File "game/tts_settings_simple.rpy", line 43: The if statement is not a valid child of the textbutton statement.
-    text_idle_color "#ffffff" if tts_voice_selector.selected_voice == "af_sky" else "#aaaaaa"
-                                ^
+The label test_haru_interactive is defined twice, at File "game/haru_live2d.rpy", line 89:
+label test_haru_interactive:
+and File "game/script.rpy", line 244:
+label test_haru_interactive:
+
+
+The label haru_motion_menu is defined twice, at File "game/haru_live2d.rpy", line 97:
+    menu haru_motion_menu:
+and File "game/script.rpy", line 248:
+    label haru_motion_menu:
+
+
+The label haru_demo_scene is defined twice, at File "game/haru_live2d.rpy", line 190:
+label haru_demo_scene:
+and File "game/script.rpy", line 271:
+label haru_demo_scene:
+
 
 Ren'Py Version: Ren'Py 8.4.1.25072401
-Sat Aug 30 16:59:05 2025
+Sat Aug 30 17:29:02 2025

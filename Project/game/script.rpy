@@ -60,7 +60,7 @@ label start:
                 jump main_menu_loop
                 
             "TTS Audio Testing":
-                call tts_menu
+                call tts_simple_test
                 jump main_menu_loop
                 
             "API and Infrastructure Testing":
@@ -72,8 +72,10 @@ label start:
                 jump main_menu_loop
                 
             "Exit":
-                system "Thank you for testing!"
-                return
+                pass  # Don't jump back to menu
+        
+    system "Thank you for testing!"
+    return
 
 # Haru Live2D Menu (Working)
 label live2d_haru_menu:
@@ -123,26 +125,6 @@ label live2d_ivy_menu:
     
     jump live2d_ivy_menu
 
-# TTS Menu
-label tts_menu:
-    menu:
-        "Text-to-Speech Testing"
-        
-        "Full TTS Test":
-            system "Launching TTS test suite..."
-            call tts_test
-            
-        "Voice Selection Menu":
-            system "Opening voice selection menu..."
-            call tts_voice_menu
-            
-        "Voice Settings Screen":
-            show screen tts_settings_simple
-            
-        "Back":
-            return
-    
-    jump tts_menu
 
 # Infrastructure Menu
 label infrastructure_menu:
@@ -196,27 +178,143 @@ label infrastructure_menu:
 
 # System Status
 label system_status:
-    system "=== System Status ==="
+    python:
+        import os
+        from datetime import datetime
+        
+        status_lines = []
+        status_lines.append("=== System Status ===")
+        status_lines.append(f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+        status_lines.append("")
+        
+        status_lines.append("Phase 1: Core Infrastructure ✓")
+        status_lines.append("  • Configuration module (config.py)")
+        status_lines.append("  • HTTP client with retry logic (api.py)")
+        status_lines.append("  • Content-based caching (cache.py)")
+        status_lines.append("  • Save-compatible state management (state.py)")
+        status_lines.append("")
+        
+        status_lines.append("Phase 2: Live2D Integration ✓")
+        status_lines.append("  • Haru model (WORKING with animations)")
+        status_lines.append("  • Ivy model (STATIC - missing motion refs)")
+        status_lines.append("  • Emotion mapping system")
+        status_lines.append("  • Motion test scenes")
+        status_lines.append("")
+        
+        status_lines.append("Phase 3: TTS Integration ✓")
+        status_lines.append("  • Audio cache system (audio_cache.py)")
+        status_lines.append("  • TTS generation with caching")
+        status_lines.append("  • Voice selection (7 Kokoro voices)")
+        status_lines.append("  • Prefetch mechanism")
+        status_lines.append("")
+        
+        if ai_config:
+            status_lines.append(f"Configuration: API URL: {ai_config.api_base_url}")
+        else:
+            status_lines.append("Configuration: Not loaded")
+        
+        status_lines.append("")
+        status_lines.append("Active Files:")
+        status_lines.append("  • script.rpy - Main game script")
+        status_lines.append("  • haru_live2d.rpy - Haru Live2D implementation")
+        status_lines.append("  • audio_tts.rpy - TTS playback system")
+        status_lines.append("  • tts_settings_simple.rpy - Voice selection UI")
+        status_lines.append("  • options.rpy - Game options")
+        
+        # Write to file
+        status_file = os.path.join(os.path.dirname(config.gamedir), "systemstatus.txt")
+        with open(status_file, 'w') as f:
+            f.write('\n'.join(status_lines))
+        
+        # Also display in game
+        for line in status_lines:
+            system(line)
+        
+        system(f"\nStatus written to: {status_file}")
     
-    system "Phase 1: Core Infrastructure ✓"
-    system "  • Configuration module (config.py)"
-    system "  • HTTP client with retry logic (api.py)"
-    system "  • Content-based caching (cache.py)"
-    system "  • Save-compatible state management (state.py)"
+    return
+
+# Simplified TTS test
+label tts_simple_test:
+    system "TTS Testing"
     
-    system "Phase 2: Live2D Integration ✓"
-    system "  • Haru model (WORKING with animations)"
-    system "  • Ivy model (STATIC - missing motion refs)"
-    system "  • Emotion mapping system"
-    system "  • Motion test scenes"
+    menu:
+        "Test Voice Playback":
+            python:
+                test_text = "Hello! This is a test of the text-to-speech system."
+                success = play_tts_line(test_text, voice="af_bella", wait=False)
+                if success:
+                    narrator("Playing TTS audio...")
+                else:
+                    narrator("TTS playback failed - check API configuration")
+            narrator "[test_text]"
+            pause 2.0
+            
+        "Open Voice Settings":
+            show screen tts_settings_simple
+            
+        "Back":
+            return
     
-    system "Phase 3: TTS Integration ✓"
-    system "  • Audio cache system (audio_cache.py)"
-    system "  • TTS generation with caching"
-    system "  • Voice selection (7 Kokoro voices)"
-    system "  • Prefetch mechanism"
+    jump tts_simple_test
+
+# Simplified Haru test
+label test_haru_simple:
+    scene black
+    show haru
+    "Haru is displayed with idle animation."
     
-    $ config_info = f"API URL: {ai_config.api_base_url}"
-    system "Configuration: [config_info]"
+    $ haru.do("g_m01")
+    "Motion: g_m01"
     
+    $ haru.do("g_idle") 
+    "Back to idle"
+    
+    hide haru
+    return
+
+
+# Test motion groups
+label test_haru_groups:
+    scene black
+    show haru
+    
+    "Testing motion groups..."
+    
+    python:
+        motions = ["g_idle", "g_m01", "g_m02", "g_m03"]
+        for motion in motions:
+            haru.do(motion)
+            narrator(f"Playing motion: {motion}")
+            renpy.pause(1.5)
+    
+    hide haru
+    return
+
+# Simple Ivy test (static model)
+label live2d_test:
+    scene black
+    "Note: Ivy model is static due to missing motion references in model3.json"
+    "Displaying Ivy model..."
+    
+    # Try to show Ivy if defined
+    # show ivy
+    "Ivy would appear here if motion references were fixed."
+    
+    return
+
+# Debug test for Ivy
+label test_live2d_debug:
+    scene black
+    "Debug mode for Ivy Live2D (currently static)"
+    "Check console for debug output if enabled."
+    return
+
+# Motion info for Ivy
+label test_live2d_with_info:
+    scene black
+    "Ivy Motion Discovery Info:"
+    "The Ivy model lacks a 'Motions' section in Ivy.model3.json"
+    "Motion files exist in Ivy/motions/ but aren't referenced"
+    "This causes the model to appear static"
     return
