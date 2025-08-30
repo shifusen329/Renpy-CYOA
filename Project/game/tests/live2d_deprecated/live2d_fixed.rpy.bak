@@ -1,0 +1,166 @@
+# Fixed Live2D Character Integration with proper motion triggering
+
+# Define Live2D characters with different emotions as separate images
+image ivy neutral = Live2D("../../Ivy/Ivy.model3.json", 
+    motion="../../Ivy/motion/neutral.motion3.json",
+    top=0.1, base=0.6, height=1.7, loop=True, seamless=True)
+
+image ivy happy = Live2D("../../Ivy/Ivy.model3.json",
+    motion="../../Ivy/motion/happy.motion3.json", 
+    top=0.1, base=0.6, height=1.7, loop=True, seamless=True)
+
+image ivy excited = Live2D("../../Ivy/Ivy.model3.json",
+    motion="../../Ivy/motion/excited.motion3.json",
+    top=0.1, base=0.6, height=1.7, loop=True, seamless=True)
+
+image ivy shy = Live2D("../../Ivy/Ivy.model3.json",
+    motion="../../Ivy/motion/shy.motion3.json",
+    top=0.1, base=0.6, height=1.7, loop=True, seamless=True)
+
+image ivy nervous = Live2D("../../Ivy/Ivy.model3.json",
+    motion="../../Ivy/motion/nervous.motion3.json",
+    top=0.1, base=0.6, height=1.7, loop=True, seamless=True)
+
+image ivy upset = Live2D("../../Ivy/Ivy.model3.json",
+    motion="../../Ivy/motion/upset.motion3.json",
+    top=0.1, base=0.6, height=1.7, loop=True, seamless=True)
+
+image ivy angry = Live2D("../../Ivy/Ivy.model3.json",
+    motion="../../Ivy/motion/hmph.motion3.json",
+    top=0.1, base=0.6, height=1.7, loop=True, seamless=True)
+
+image ivy confused = Live2D("../../Ivy/Ivy.model3.json",
+    motion="../../Ivy/motion/disagreement.motion3.json",
+    top=0.1, base=0.6, height=1.7, loop=True, seamless=True)
+
+image ivy dancing = Live2D("../../Ivy/Ivy.model3.json",
+    motion="../../Ivy/motion/dancing.motion3.json",
+    top=0.1, base=0.6, height=1.7, loop=True, seamless=True)
+
+image ivy idle = Live2D("../../Ivy/Ivy.model3.json",
+    motion="../../Ivy/motion/idle.motion3.json",
+    top=0.1, base=0.6, height=1.7, loop=True, seamless=True)
+
+# Define transforms for positioning
+transform center_live2d:
+    xalign 0.5
+    yalign 1.0
+    zoom 0.5
+
+transform left_live2d:
+    xalign 0.25
+    yalign 1.0
+    zoom 0.5
+
+transform right_live2d:
+    xalign 0.75
+    yalign 1.0
+    zoom 0.5
+
+# Test label using show statements
+label test_live2d_fixed:
+    scene black
+    
+    system "Testing Live2D with proper motion triggering..."
+    
+    # Show neutral Ivy
+    show ivy neutral at center_live2d
+    narrator "Ivy appears with neutral expression."
+    pause 2.0
+    
+    # Change to happy
+    hide ivy
+    show ivy happy at center_live2d
+    narrator "Ivy looks happy!"
+    pause 2.0
+    
+    # Change to excited
+    hide ivy
+    show ivy excited at center_live2d
+    narrator "Ivy is excited!"
+    pause 2.0
+    
+    # Change to shy
+    hide ivy
+    show ivy shy at center_live2d
+    narrator "Ivy looks shy..."
+    pause 2.0
+    
+    # Change to nervous
+    hide ivy
+    show ivy nervous at center_live2d
+    narrator "Ivy seems nervous."
+    pause 2.0
+    
+    # Change to upset
+    hide ivy
+    show ivy upset at center_live2d
+    narrator "Ivy is upset..."
+    pause 2.0
+    
+    # Change to angry
+    hide ivy
+    show ivy angry at center_live2d
+    narrator "Ivy looks angry!"
+    pause 2.0
+    
+    # Change to confused
+    hide ivy
+    show ivy confused at center_live2d
+    narrator "Ivy seems confused?"
+    pause 2.0
+    
+    # Change to dancing
+    hide ivy
+    show ivy dancing at center_live2d
+    narrator "Ivy is dancing!"
+    pause 2.0
+    
+    # Back to idle
+    hide ivy
+    show ivy idle at center_live2d
+    narrator "Ivy returns to idle."
+    
+    menu:
+        "Test completed. Motions should have played."
+        
+        "Test Again":
+            jump test_live2d_fixed
+            
+        "Return":
+            hide ivy
+            return
+
+# Helper function to show Live2D with emotion
+init python:
+    def show_ivy_emotion(emotion):
+        """Show Ivy with specified emotion using renpy.show."""
+        # Hide current
+        renpy.hide("ivy")
+        
+        # Map emotions to image tags
+        emotion_map = {
+            "neutral": "neutral",
+            "happy": "happy",
+            "excited": "excited", 
+            "shy": "shy",
+            "nervous": "nervous",
+            "upset": "upset",
+            "sad": "upset",
+            "angry": "angry",
+            "confused": "confused",
+            "disagreement": "confused",
+            "playful": "dancing",
+            "dancing": "dancing",
+            "idle": "idle"
+        }
+        
+        # Get image tag
+        image_tag = emotion_map.get(emotion, "neutral")
+        
+        # Show new emotion
+        renpy.show(f"ivy {image_tag}", at_list=[center_live2d])
+        
+    def hide_ivy():
+        """Hide Ivy character."""
+        renpy.hide("ivy")

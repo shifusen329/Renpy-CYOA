@@ -20,7 +20,7 @@ class Config:
     # Model Configuration
     default_chat_model: str = "Dolphin-Mistral-24B-Venice-Edition"
     tts_model: str = "kokoro"
-    tts_voice: str = "af_heart"
+    tts_voice: str = "af_bella"  # Kokoro voice: American female, friendly
     
     # SD WebUI Configuration
     sd_webui_url: Optional[str] = None

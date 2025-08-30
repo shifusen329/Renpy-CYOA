@@ -1,0 +1,56 @@
+# Simplified Live2D Implementation
+# Uses the approach that actually works in Ren'Py
+
+# Define each emotion as a separate Live2D image
+# This is the most reliable approach
+
+image ivy neutral = Live2D("../../Ivy/Ivy.model3.json", base=0.6, height=1.7)
+image ivy happy = Live2D("../../Ivy/Ivy.model3.json", base=0.6, height=1.7)  
+image ivy excited = Live2D("../../Ivy/Ivy.model3.json", base=0.6, height=1.7)
+image ivy shy = Live2D("../../Ivy/Ivy.model3.json", base=0.6, height=1.7)
+image ivy nervous = Live2D("../../Ivy/Ivy.model3.json", base=0.6, height=1.7)
+image ivy upset = Live2D("../../Ivy/Ivy.model3.json", base=0.6, height=1.7)
+image ivy angry = Live2D("../../Ivy/Ivy.model3.json", base=0.6, height=1.7)
+image ivy confused = Live2D("../../Ivy/Ivy.model3.json", base=0.6, height=1.7)
+image ivy dancing = Live2D("../../Ivy/Ivy.model3.json", base=0.6, height=1.7)
+image ivy idle = Live2D("../../Ivy/Ivy.model3.json", base=0.6, height=1.7)
+
+# Positioning transform
+transform center_pos:
+    xalign 0.5
+    yalign 1.0
+
+# Character
+define ivy_char = Character("Ivy", color="#c8a2c8")
+
+# Simple test
+label test_live2d_simple:
+    scene black
+    
+    narrator "Testing simplified Live2D implementation..."
+    
+    # Note: Without motion files specified, Live2D will show the default pose
+    # The actual motion triggering would need to be done through Live2D's internal system
+    # or by using the Live2D SDK's motion playback features
+    
+    show ivy neutral at center_pos
+    ivy_char "This is the neutral pose."
+    
+    hide ivy
+    show ivy happy at center_pos  
+    ivy_char "This should be happy, but it might show the same pose."
+    
+    hide ivy
+    show ivy excited at center_pos
+    ivy_char "This is labeled as excited."
+    
+    hide ivy
+    show ivy dancing at center_pos
+    ivy_char "And this is dancing."
+    
+    narrator "Note: Without proper motion file integration, these may all look the same."
+    narrator "The Live2D model loads, but motion playback requires additional setup."
+    
+    hide ivy
+    
+    return

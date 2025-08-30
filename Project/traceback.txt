@@ -1,30 +1,70 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "game/live2d.rpy", line 119, in script
-    init python:
-  File "game/live2d.rpy", line 120, in <module>
-    def play_emotion_motion(emotion, character=ivy_live2d):
-                                               ^^^^^^^^^^  
-NameError: name 'ivy_live2d' is not defined
+  File "game/script.rpy", line 75, in script
+    system "Thank you for testing!"
+AttributeError: 'Layout' object has no attribute 'yesno_prompt'
 
 -- Full Traceback ------------------------------------------------------------
 
 Traceback (most recent call last):
-  File "game/live2d.rpy", line 119, in script
-    init python:
-  File "renpy/ast.py", line 1187, in execute
-    renpy.python.py_exec_bytecode(self.code.bytecode, self.hide, store=self.store)
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "renpy/python.py", line 1260, in py_exec_bytecode
-    exec(bytecode, globals, locals)
-    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "game/live2d.rpy", line 120, in <module>
-    def play_emotion_motion(emotion, character=ivy_live2d):
-                                               ^^^^^^^^^^  
-NameError: name 'ivy_live2d' is not defined
+  File "game/script.rpy", line 75, in script
+    system "Thank you for testing!"
+  File "renpy/ast.py", line 2915, in execute
+    Say.execute(self)
+    ~~~~~~~~~~~^^^^^^
+  File "renpy/ast.py", line 991, in execute
+    renpy.exports.say(who, what, *args, **kwargs)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "renpy/exports/sayexports.py", line 129, in say
+    who(what, *args, **kwargs)
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "renpy/character.py", line 1543, in __call__
+    self.do_display(who, what, cb_args=self.cb_args, dtt=dtt, **display_args)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "renpy/character.py", line 1198, in do_display
+    display_say(who, what, self.do_show, **display_args)
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "renpy/character.py", line 888, in display_say
+    rv = renpy.ui.interact(mouse="say", type=type, roll_forward=roll_forward)
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "renpy/ui.py", line 304, in interact
+    rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
+         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "renpy/display/core.py", line 2219, in interact
+    repeat, rv = self.interact_core(
+                 ~~~~~~~~~~~~~~~~~~^
+        preloads=preloads,
+        ^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    )  # type: ignore
+    ^                
+  File "renpy/display/core.py", line 3137, in interact_core
+    self.quit_event()
+    ~~~~~~~~~~~~~~~^^
+  File "renpy/display/core.py", line 1813, in quit_event
+    renpy.display.behavior.run(renpy.config.quit_action)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "renpy/display/behavior.py", line 411, in run
+    return action(*args, **kwargs)
+           ~~~~~~^^^^^^^^^^^^^^^^^
+  File "renpy/common/00action_menu.rpy", line 271, in __call__
+    layout.yesno_screen(layout.QUIT, Quit(False))
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "renpy/common/00layout.rpy", line 517, in yesno_screen
+    elif renpy.invoke_in_new_context(layout.invoke_yesno_prompt, None, message):
+         ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ 
+  File "renpy/game.py", line 301, in invoke_in_new_context
+    return callable(*args, **kwargs)
+           ~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "renpy/common/00layout.rpy", line 472, in invoke_yesno_prompt
+    rv = layout.yesno_prompt(*args)
+         ^^^^^^^^^^^^^^^^^^^       
+AttributeError: 'Layout' object has no attribute 'yesno_prompt'
 
 Linux-6.8.0-78-generic-x86_64-with-glibc2.35 x86_64
 Ren'Py 8.4.1.25072401
  
-Fri Aug 29 22:26:50 2025
+Sat Aug 30 17:15:14 2025

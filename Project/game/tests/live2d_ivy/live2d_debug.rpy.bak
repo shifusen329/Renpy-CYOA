@@ -1,0 +1,149 @@
+# Live2D Debug Configuration and Proper Implementation
+
+# Enable Live2D loading debug (per documentation line 144-146)
+define config.log_live2d_loading = True
+
+# According to the documentation, motions should be automatically discovered
+# from the model files. Let's create a proper implementation that follows
+# the documented approach.
+
+# The Live2D displayable should automatically find motions in the model directory
+# Motion names are normalized: lowercase, with model name prefix removed
+image ivy live2d = Live2D("../../Ivy",  # Can use directory instead of .model3.json
+    base=0.6,
+    height=1.7,
+    loop=True,
+    seamless=True,
+    fade=True,  # Enable motion fading for smooth transitions
+    default_fade=0.5)  # 0.5 second fade between motions
+
+# Positioning transforms
+transform ivy_center:
+    xalign 0.5
+    yalign 1.0
+
+# Character definition
+define ivy = Character("Ivy", color="#c8a2c8")
+
+# Test label to see what motions are available
+label test_live2d_debug:
+    scene black
+    
+    system "=== Live2D Debug Test ==="
+    system "Check log.txt to see what motions were loaded."
+    
+    # Show the Live2D model
+    show ivy live2d at ivy_center
+    ivy "I'm the base Live2D model."
+    
+    # Try using motion names directly (they should be auto-discovered)
+    # Based on our motion files, these should be available:
+    # idle, happy, excited, shy, nervous, upset, hmph, disagreement, neutral, dancing
+    
+    # Try idle motion
+    show ivy live2d idle
+    ivy "Trying 'idle' motion..."
+    pause 2.0
+    
+    # Try happy motion  
+    show ivy live2d happy
+    ivy "Trying 'happy' motion..."
+    pause 2.0
+    
+    # Try excited motion
+    show ivy live2d excited
+    ivy "Trying 'excited' motion..."
+    pause 2.0
+    
+    # Try the special 'still' attribute to stop motion
+    show ivy live2d still
+    ivy "Using 'still' to stop all motion."
+    pause 2.0
+    
+    # Try multiple motions in sequence
+    show ivy live2d happy excited dancing
+    ivy "Playing happy, then excited, then looping dancing..."
+    pause 3.0
+    
+    hide ivy
+    
+    system "Check log.txt for Live2D loading information."
+    
+    return
+
+# Alternative approach: Define with motion files explicitly
+# This might help if auto-discovery isn't working
+init python:
+    # Try to manually check what's available
+    import os
+    
+    def list_motion_files():
+        """List motion files in Ivy directory."""
+        try:
+            ivy_path = os.path.join(config.gamedir, "../../Ivy/motion")
+            if os.path.exists(ivy_path):
+                files = [f for f in os.listdir(ivy_path) if f.endswith('.motion3.json')]
+                return files
+            else:
+                return ["Motion directory not found"]
+        except Exception as e:
+            return [f"Error: {e}"]
+    
+    # Get list of motion files
+    available_motions = list_motion_files()
+
+# Screen to display available motions
+screen live2d_motion_info():
+    frame:
+        xalign 0.0
+        yalign 0.0
+        padding (10, 10)
+        
+        vbox:
+            text "Available Motion Files:" size 16 color "#00ff00"
+            for motion in available_motions:
+                text f"  • {motion}" size 14
+
+# Test with motion info display
+label test_live2d_with_info:
+    scene black
+    show screen live2d_motion_info
+    
+    system "=== Live2D Motion Discovery Test ==="
+    
+    show ivy live2d at ivy_center
+    ivy "Displaying available motion files on screen..."
+    
+    narrator "The motion files shown should be usable as attributes."
+    narrator "For example: 'show ivy live2d happy' if happy.motion3.json exists."
+    
+    menu motion_test_menu:
+        "Try idle":
+            show ivy live2d idle
+            ivy "Attempting idle motion..."
+            jump motion_test_menu
+            
+        "Try happy":
+            show ivy live2d happy
+            ivy "Attempting happy motion..."
+            jump motion_test_menu
+            
+        "Try excited":
+            show ivy live2d excited
+            ivy "Attempting excited motion..."
+            jump motion_test_menu
+            
+        "Try dancing":
+            show ivy live2d dancing
+            ivy "Attempting dancing motion..."
+            jump motion_test_menu
+            
+        "Try still":
+            show ivy live2d still
+            ivy "Stopping all motion with 'still'..."
+            jump motion_test_menu
+            
+        "Exit":
+            hide screen live2d_motion_info
+            hide ivy
+            return

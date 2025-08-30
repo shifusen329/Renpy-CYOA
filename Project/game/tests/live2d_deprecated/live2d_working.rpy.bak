@@ -1,0 +1,253 @@
+# Working Live2D Implementation
+# This approach creates separate images with motion attributes
+
+# Base Live2D without motion for static display
+image ivy_base = Live2D("../../Ivy/Ivy.model3.json",
+    base=0.6,
+    height=1.7,
+    loop=False,
+    seamless=False)
+
+# Define separate images for each emotion with specific motions
+# Each one loads the same model but with different default animations
+image ivy idle = Live2D("../../Ivy/Ivy.model3.json",
+    base=0.6, height=1.7, loop=True, seamless=True,
+    motions=["../../Ivy/motion/idle.motion3.json"])
+
+image ivy neutral = Live2D("../../Ivy/Ivy.model3.json",
+    base=0.6, height=1.7, loop=True, seamless=True,
+    motions=["../../Ivy/motion/neutral.motion3.json"])
+
+image ivy happy = Live2D("../../Ivy/Ivy.model3.json",
+    base=0.6, height=1.7, loop=True, seamless=True,
+    motions=["../../Ivy/motion/happy.motion3.json"])
+
+image ivy excited = Live2D("../../Ivy/Ivy.model3.json",
+    base=0.6, height=1.7, loop=True, seamless=True,
+    motions=["../../Ivy/motion/excited.motion3.json"])
+
+image ivy shy = Live2D("../../Ivy/Ivy.model3.json",
+    base=0.6, height=1.7, loop=True, seamless=True,
+    motions=["../../Ivy/motion/shy.motion3.json"])
+
+image ivy nervous = Live2D("../../Ivy/Ivy.model3.json",
+    base=0.6, height=1.7, loop=True, seamless=True,
+    motions=["../../Ivy/motion/nervous.motion3.json"])
+
+image ivy upset = Live2D("../../Ivy/Ivy.model3.json",
+    base=0.6, height=1.7, loop=True, seamless=True,
+    motions=["../../Ivy/motion/upset.motion3.json"])
+
+image ivy sad = Live2D("../../Ivy/Ivy.model3.json",
+    base=0.6, height=1.7, loop=True, seamless=True,
+    motions=["../../Ivy/motion/upset.motion3.json"])
+
+image ivy angry = Live2D("../../Ivy/Ivy.model3.json",
+    base=0.6, height=1.7, loop=True, seamless=True,
+    motions=["../../Ivy/motion/hmph.motion3.json"])
+
+image ivy confused = Live2D("../../Ivy/Ivy.model3.json",
+    base=0.6, height=1.7, loop=True, seamless=True,
+    motions=["../../Ivy/motion/disagreement.motion3.json"])
+
+image ivy dancing = Live2D("../../Ivy/Ivy.model3.json",
+    base=0.6, height=1.7, loop=True, seamless=True,
+    motions=["../../Ivy/motion/dancing.motion3.json"])
+
+# Define positioning transforms
+transform ivy_center:
+    xalign 0.5
+    yalign 1.0
+
+transform ivy_left:
+    xalign 0.25
+    yalign 1.0
+
+transform ivy_right:
+    xalign 0.75
+    yalign 1.0
+
+# Character definition
+define ivy = Character("Ivy", color="#c8a2c8")
+
+# Test label
+label test_live2d_working:
+    scene black
+    
+    system "=== Working Live2D Test ==="
+    narrator "Testing Live2D with separate emotion images."
+    
+    # Show neutral
+    show ivy neutral at ivy_center
+    ivy "Hi! I'm showing my neutral animation."
+    
+    # Transition to happy (with hide/show)
+    hide ivy
+    show ivy happy at ivy_center
+    ivy "Now I'm happy! Notice the smooth transition."
+    
+    # Transition to excited
+    hide ivy
+    show ivy excited at ivy_center
+    ivy "I'm so excited!"
+    
+    # Transition to shy
+    hide ivy
+    show ivy shy at ivy_center
+    ivy "Oh... feeling a bit shy..."
+    
+    # Transition to nervous
+    hide ivy
+    show ivy nervous at ivy_center
+    ivy "This makes me nervous..."
+    
+    # Transition to upset
+    hide ivy
+    show ivy upset at ivy_center
+    ivy "Now I'm upset..."
+    
+    # Transition to angry
+    hide ivy
+    show ivy angry at ivy_center
+    ivy "Hmph! I'm angry!"
+    
+    # Transition to confused
+    hide ivy
+    show ivy confused at ivy_center
+    ivy "I'm confused?"
+    
+    # Transition to dancing
+    hide ivy
+    show ivy dancing at ivy_center
+    ivy "Let's dance!"
+    
+    # Back to neutral
+    hide ivy
+    show ivy neutral at ivy_center
+    ivy "And back to neutral."
+    
+    menu emotion_menu_working:
+        ivy "Which emotion would you like to see?"
+        
+        "Happy":
+            hide ivy
+            show ivy happy at ivy_center
+            ivy "I'm happy! 😊"
+            jump emotion_menu_working
+            
+        "Excited":
+            hide ivy
+            show ivy excited at ivy_center
+            ivy "So exciting! ✨"
+            jump emotion_menu_working
+            
+        "Shy":
+            hide ivy
+            show ivy shy at ivy_center
+            ivy "Oh... I'm shy... 😳"
+            jump emotion_menu_working
+            
+        "Nervous":
+            hide ivy
+            show ivy nervous at ivy_center
+            ivy "Um... nervous... 😰"
+            jump emotion_menu_working
+            
+        "Upset":
+            hide ivy
+            show ivy upset at ivy_center
+            ivy "I'm upset... 😢"
+            jump emotion_menu_working
+            
+        "Angry":
+            hide ivy
+            show ivy angry at ivy_center
+            ivy "Grr! 😠"
+            jump emotion_menu_working
+            
+        "Confused":
+            hide ivy
+            show ivy confused at ivy_center
+            ivy "Huh? 🤔"
+            jump emotion_menu_working
+            
+        "Dancing":
+            hide ivy
+            show ivy dancing at ivy_center
+            ivy "Dance time! 💃"
+            jump emotion_menu_working
+            
+        "Exit":
+            hide ivy
+            return
+
+# Helper function for programmatic emotion changes
+init python:
+    def show_ivy_emotion_working(emotion, transform=None):
+        """Show Ivy with a specific emotion."""
+        if transform is None:
+            transform = ivy_center
+        
+        # Hide current ivy
+        renpy.hide("ivy")
+        
+        # Show new emotion
+        renpy.show(f"ivy {emotion}", at_list=[transform])
+        
+    def transition_ivy_emotion(emotion, transition_time=0.5):
+        """Transition to a new emotion with a dissolve."""
+        renpy.hide("ivy")
+        renpy.with_statement(Dissolve(transition_time))
+        renpy.show(f"ivy {emotion}", at_list=[ivy_center])
+        renpy.with_statement(Dissolve(transition_time))
+
+# Story example using the working implementation
+label live2d_story_working:
+    scene black
+    
+    narrator "A day in Ivy's life..."
+    
+    show ivy neutral at ivy_center
+    ivy "Good morning! Let me tell you about my day."
+    
+    hide ivy
+    show ivy happy at ivy_center
+    ivy "I woke up feeling happy and refreshed!"
+    
+    hide ivy
+    show ivy excited at ivy_center
+    ivy "I was excited to start working on my project!"
+    
+    hide ivy
+    show ivy nervous at ivy_center
+    ivy "Though I was a bit nervous about whether I could finish it..."
+    
+    hide ivy
+    show ivy confused at ivy_center
+    ivy "At first, I was confused by some of the requirements."
+    
+    hide ivy
+    show ivy upset at ivy_center
+    ivy "I got upset when things didn't work as expected..."
+    
+    hide ivy
+    show ivy angry at ivy_center
+    ivy "I even got a little angry at the bugs!"
+    
+    hide ivy
+    show ivy happy at ivy_center
+    ivy "But then I figured it out and was happy again!"
+    
+    hide ivy
+    show ivy dancing at ivy_center
+    ivy "So happy that I had to celebrate with a dance!"
+    
+    hide ivy
+    show ivy neutral at ivy_center
+    ivy "It was quite an eventful day!"
+    
+    hide ivy
+    
+    narrator "The end."
+    
+    return

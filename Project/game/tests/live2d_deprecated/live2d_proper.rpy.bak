@@ -1,0 +1,226 @@
+# Proper Live2D Implementation based on Ren'Py documentation
+# This implementation uses attributes for motions and expressions as intended
+
+# Define the Live2D character
+# The Live2D system will look for motions in Ivy/motion/ directory
+image ivy_live2d = Live2D("../../Ivy",
+    base=0.6,
+    height=1.7,
+    loop=True,
+    seamless=True,
+    default_fade=0.5)
+
+# Define positioning transforms
+transform ivy_center:
+    xalign 0.5
+    yalign 1.0
+
+transform ivy_left:
+    xalign 0.25
+    yalign 1.0
+
+transform ivy_right:
+    xalign 0.75
+    yalign 1.0
+
+# Character definition
+define ivy = Character("Ivy", color="#c8a2c8")
+
+# Test label using the proper Live2D attribute system
+label test_live2d_proper:
+    scene black
+    
+    system "=== Proper Live2D Implementation Test ==="
+    narrator "Testing Live2D with motion attributes as documented."
+    
+    # Show with default/idle motion
+    show ivy_live2d at ivy_center
+    ivy "Hi! I'm using the default idle animation."
+    
+    # Change to happy motion
+    show ivy_live2d happy
+    ivy "Now I'm happy! The motion changed to happy."
+    
+    # Change to excited
+    show ivy_live2d excited
+    ivy "I'm so excited! Notice how the motion transitions smoothly."
+    
+    # Multiple motions in sequence
+    show ivy_live2d nervous shy
+    ivy "First I'm nervous, then I become shy..."
+    narrator "Multiple motions play in sequence."
+    
+    # Test all emotions
+    show ivy_live2d neutral
+    ivy "Let me show you all my emotions properly..."
+    
+    menu emotion_test_proper:
+        ivy "Which emotion would you like to see?"
+        
+        "Happy":
+            show ivy_live2d happy
+            ivy "I'm happy! 😊"
+            
+        "Excited":
+            show ivy_live2d excited
+            ivy "So exciting! ✨"
+            
+        "Shy":
+            show ivy_live2d shy
+            ivy "Oh... I'm feeling shy... 😳"
+            
+        "Nervous":
+            show ivy_live2d nervous
+            ivy "This makes me nervous... 😰"
+            
+        "Upset":
+            show ivy_live2d upset
+            ivy "I'm upset now... 😢"
+            
+        "Angry":
+            show ivy_live2d angry
+            ivy "Hmph! I'm angry! 😠"
+            
+        "Confused":
+            show ivy_live2d confused
+            ivy "I don't understand...? 🤔"
+            
+        "Dancing":
+            show ivy_live2d dancing
+            ivy "Let's dance! 💃"
+            
+        "Back to neutral":
+            show ivy_live2d neutral
+            ivy "Back to normal."
+            
+        "Exit test":
+            jump proper_test_end
+    
+    jump emotion_test_proper
+    
+    label proper_test_end:
+        show ivy_live2d happy
+        ivy "Thanks for testing the proper Live2D implementation!"
+        
+        hide ivy_live2d
+        return
+
+# Advanced test with motion sequences
+label test_live2d_sequences:
+    scene black
+    
+    system "=== Live2D Motion Sequences Test ==="
+    
+    show ivy_live2d at ivy_center
+    ivy "I can play multiple motions in sequence."
+    
+    # Play a sequence of motions
+    show ivy_live2d happy excited dancing
+    ivy "Happy, then excited, then dancing - all in sequence!"
+    narrator "The final motion (dancing) will loop."
+    
+    pause 3.0
+    
+    # Test motion with 'still' attribute
+    show ivy_live2d still
+    ivy "The 'still' attribute stops all motion."
+    
+    # Resume with a new motion
+    show ivy_live2d idle
+    ivy "And now I'm back to idle."
+    
+    return
+
+# Test with dynamic motion selection
+label test_live2d_dynamic:
+    scene black
+    
+    system "=== Dynamic Live2D Test ==="
+    
+    show ivy_live2d at ivy_center
+    
+    python:
+        import random
+        emotions = ["happy", "excited", "shy", "nervous", "upset", "angry", "confused", "dancing"]
+        
+    ivy "I'll show random emotions!"
+    
+    $ random_count = 0
+    
+    label random_emotion_loop:
+        python:
+            if random_count < 5:
+                emotion = random.choice(emotions)
+                renpy.show("ivy_live2d", at_list=[ivy_center], what=Live2D("../../Ivy/Ivy.model3.json"), tag="ivy_live2d", layer="master", zorder=0, behind=[], atl=None, default_transform=None, transient=False)
+                renpy.show("ivy_live2d", what=None, at_list=[], layer="master", zorder=0, behind=[], atl=None, default_transform=None, transient=False, tag="ivy_live2d", _attributes=(emotion,))
+                random_count += 1
+        
+        if random_count <= 5:
+            ivy "Random emotion [random_count]: [emotion]!"
+            pause 2.0
+            jump random_emotion_loop
+    
+    show ivy_live2d neutral
+    ivy "That was fun!"
+    
+    hide ivy_live2d
+    return
+
+# Helper functions for programmatic control
+init python:
+    def show_ivy_with_emotion(emotion, at_transform=None):
+        """Show Ivy with a specific emotion using the proper attribute system."""
+        if at_transform is None:
+            at_transform = ivy_center
+        
+        # First show the base Live2D
+        if not renpy.showing("ivy_live2d"):
+            renpy.show("ivy_live2d", at_list=[at_transform])
+        
+        # Then apply the emotion attribute
+        renpy.show("ivy_live2d " + emotion)
+    
+    def queue_ivy_motions(*motions):
+        """Queue multiple motions to play in sequence."""
+        motion_string = " ".join(motions)
+        renpy.show("ivy_live2d " + motion_string)
+    
+    def stop_ivy_motion():
+        """Stop all ivy motions using the 'still' attribute."""
+        renpy.show("ivy_live2d still")
+
+# Example scene using the proper implementation
+label live2d_story_proper:
+    scene black
+    
+    narrator "A story using the proper Live2D implementation..."
+    
+    show ivy_live2d neutral at ivy_center
+    ivy "Let me tell you about my day..."
+    
+    show ivy_live2d happy
+    ivy "I woke up feeling great!"
+    
+    show ivy_live2d excited
+    ivy "I was excited to start working on something new!"
+    
+    show ivy_live2d nervous
+    ivy "But then I got a bit nervous about whether I could do it..."
+    
+    show ivy_live2d upset
+    ivy "I felt upset when things didn't work at first..."
+    
+    show ivy_live2d confused
+    ivy "I was confused about what went wrong..."
+    
+    show ivy_live2d happy
+    ivy "But then I figured it out and was happy again!"
+    
+    show ivy_live2d dancing
+    ivy "So happy that I had to dance!"
+    
+    show ivy_live2d neutral
+    ivy "And that's how my day went!"
+    
+    hide ivy_live2d
+    return

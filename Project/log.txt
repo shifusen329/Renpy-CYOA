@@ -1,16 +1,88 @@
-2025-08-30 03:30:02 UTC
+2025-08-30 22:14:37 UTC
 Linux-6.8.0-78-generic-x86_64-with-glibc2.35
 Ren'Py 8.4.1.25072401
 
-Early init took 20 ms
+Early init took 19 ms
 Loading error handling took 7 ms
-Loading script took 31 ms
-Loading save slot metadata took 1 ms
+Loading script took 66 ms
+Loading save slot metadata took 2 ms
 Loading persistent took 0 ms
-Running init code took 36 ms
+Loading Live2D from 'assets/live2d/Haru/Haru.model3.json'.
+ - motion g_idle -> motions/haru_g_idle.motion3.json
+ - motion g_m01 -> motions/haru_g_m01.motion3.json
+ - motion g_m02 -> motions/haru_g_m02.motion3.json
+ - motion g_m03 -> motions/haru_g_m03.motion3.json
+ - motion g_m04 -> motions/haru_g_m04.motion3.json
+ - motion g_m05 -> motions/haru_g_m05.motion3.json
+ - motion g_m06 -> motions/haru_g_m06.motion3.json
+ - motion g_m07 -> motions/haru_g_m07.motion3.json
+ - motion g_m08 -> motions/haru_g_m08.motion3.json
+ - motion g_m09 -> motions/haru_g_m09.motion3.json
+ - motion g_m10 -> motions/haru_g_m10.motion3.json
+ - motion g_m11 -> motions/haru_g_m11.motion3.json
+ - motion g_m12 -> motions/haru_g_m12.motion3.json
+ - motion g_m13 -> motions/haru_g_m13.motion3.json
+ - motion g_m14 -> motions/haru_g_m14.motion3.json
+ - motion g_m15 -> motions/haru_g_m15.motion3.json
+ - motion g_m16 -> motions/haru_g_m16.motion3.json
+ - motion g_m17 -> motions/haru_g_m17.motion3.json
+ - motion g_m18 -> motions/haru_g_m18.motion3.json
+ - motion g_m19 -> motions/haru_g_m19.motion3.json
+ - motion g_m20 -> motions/haru_g_m20.motion3.json
+ - motion g_m21 -> motions/haru_g_m21.motion3.json
+ - motion g_m22 -> motions/haru_g_m22.motion3.json
+ - motion g_m23 -> motions/haru_g_m23.motion3.json
+ - motion g_m24 -> motions/haru_g_m24.motion3.json
+ - motion g_m25 -> motions/haru_g_m25.motion3.json
+ - motion g_m26 -> motions/haru_g_m26.motion3.json
+ - expression f01 -> expressions/F01.exp3.json
+ - expression f02 -> expressions/F02.exp3.json
+ - expression f03 -> expressions/F03.exp3.json
+ - expression f04 -> expressions/F04.exp3.json
+ - expression f05 -> expressions/F05.exp3.json
+ - expression f06 -> expressions/F06.exp3.json
+ - expression f07 -> expressions/F07.exp3.json
+ - expression f08 -> expressions/F08.exp3.json
+Loading Live2D from 'assets/live2d/Haru/Haru.model3.json'.
+ - motion g_idle -> motions/haru_g_idle.motion3.json
+ - motion g_m01 -> motions/haru_g_m01.motion3.json
+ - motion g_m02 -> motions/haru_g_m02.motion3.json
+ - motion g_m03 -> motions/haru_g_m03.motion3.json
+ - motion g_m04 -> motions/haru_g_m04.motion3.json
+ - motion g_m05 -> motions/haru_g_m05.motion3.json
+ - motion g_m06 -> motions/haru_g_m06.motion3.json
+ - motion g_m07 -> motions/haru_g_m07.motion3.json
+ - motion g_m08 -> motions/haru_g_m08.motion3.json
+ - motion g_m09 -> motions/haru_g_m09.motion3.json
+ - motion g_m10 -> motions/haru_g_m10.motion3.json
+ - motion g_m11 -> motions/haru_g_m11.motion3.json
+ - motion g_m12 -> motions/haru_g_m12.motion3.json
+ - motion g_m13 -> motions/haru_g_m13.motion3.json
+ - motion g_m14 -> motions/haru_g_m14.motion3.json
+ - motion g_m15 -> motions/haru_g_m15.motion3.json
+ - motion g_m16 -> motions/haru_g_m16.motion3.json
+ - motion g_m17 -> motions/haru_g_m17.motion3.json
+ - motion g_m18 -> motions/haru_g_m18.motion3.json
+ - motion g_m19 -> motions/haru_g_m19.motion3.json
+ - motion g_m20 -> motions/haru_g_m20.motion3.json
+ - motion g_m21 -> motions/haru_g_m21.motion3.json
+ - motion g_m22 -> motions/haru_g_m22.motion3.json
+ - motion g_m23 -> motions/haru_g_m23.motion3.json
+ - motion g_m24 -> motions/haru_g_m24.motion3.json
+ - motion g_m25 -> motions/haru_g_m25.motion3.json
+ - motion g_m26 -> motions/haru_g_m26.motion3.json
+ - expression f01 -> expressions/F01.exp3.json
+ - expression f02 -> expressions/F02.exp3.json
+ - expression f03 -> expressions/F03.exp3.json
+ - expression f04 -> expressions/F04.exp3.json
+ - expression f05 -> expressions/F05.exp3.json
+ - expression f06 -> expressions/F06.exp3.json
+ - expression f07 -> expressions/F07.exp3.json
+ - expression f08 -> expressions/F08.exp3.json
+Running init code took 58 ms
 Loading analysis data took 1 ms
-Analyze and compile ATL took 1 ms
-Reloading save slot metadata took 1 ms
+Analyze and compile ATL took 0 ms
+Reloading save slot metadata took 2 ms
 Backing up script files to '/home/administrator/.renpy/backups/Project':
 Dump and make backups took 0 ms
 Cleaning cache took 0 ms
@@ -21,21 +93,69 @@ Creating interface object took 0 ms
 Init translation took 0 ms
 Cleaning stores took 0 ms
 Load screen analysis took 0 ms
-Analyze screens took 3 ms
+Analyze screens took 4 ms
 Save screen analysis took 4 ms
 Save pyanalysis took 1 ms
 Save bytecode took 12 ms
-﻿Ren'Py 8.4.1.25072401 lint report, generated at: Fri Aug 29 22:30:02 2025
-It is advised to set config.check_conflicting_properties to True.
+Running _start took 0 ms
+Interface start took 706 ms
 
+Initializing gl2 renderer:
+primary display bounds: (0, 0, 1646, 1029)
+swap interval: 1 frames
+Windowed mode.
+Vendor: 'Mesa'
+Renderer: 'llvmpipe (LLVM 15.0.7, 256 bits)'
+Version: '4.5 (Compatibility Profile) Mesa 23.2.1-1ubuntu3.1~22.04.3'
+Display Info: <Info({'bitsize': 32, 'bytesize': 4, 'masks': (16711680, 65280, 255, 0), 'shifts': (16, 8, 0, 0), 'losses': (0, 0, 0, 8), 'current_w': 1646, 'current_h': 1029, 'refresh_rate': 0, 'hw': False, 'wm': True, 'video_mem': 268435456, 'blit_hw': False, 'blit_hw_CC': False, 'blit_hw_A': False, 'blit_sw': False, 'blit_sw_CC': False, 'blit_sw_A': False})>
+Screen sizes: virtual=(800, 600) physical=(800, 600) drawable=(800, 600)
+Maximum texture size: 4096x4096
+Could not open 'cache/shaders.txt':
+Cleaning stores took 0 ms
+Load screen analysis took 6 ms
+Analyze screens took 0 ms
+Running _start took 0 ms
 
-Statistics:
+Full traceback:
+  File "game/script.rpy", line 75, in script
+    system "Thank you for testing!"
+  File "renpy/ast.py", line 2915, in execute
+    Say.execute(self)
+  File "renpy/ast.py", line 991, in execute
+    renpy.exports.say(who, what, *args, **kwargs)
+  File "renpy/exports/sayexports.py", line 129, in say
+    who(what, *args, **kwargs)
+  File "renpy/character.py", line 1543, in __call__
+    self.do_display(who, what, cb_args=self.cb_args, dtt=dtt, **display_args)
+  File "renpy/character.py", line 1198, in do_display
+    display_say(who, what, self.do_show, **display_args)
+  File "renpy/character.py", line 888, in display_say
+    rv = renpy.ui.interact(mouse="say", type=type, roll_forward=roll_forward)
+  File "renpy/ui.py", line 304, in interact
+    rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
+  File "renpy/display/core.py", line 2219, in interact
+    repeat, rv = self.interact_core(
+        preloads=preloads,
+    ...<4 lines>...
+        **kwargs,
+    )  # type: ignore
+  File "renpy/display/core.py", line 3137, in interact_core
+    self.quit_event()
+  File "renpy/display/core.py", line 1813, in quit_event
+    renpy.display.behavior.run(renpy.config.quit_action)
+  File "renpy/display/behavior.py", line 411, in run
+    return action(*args, **kwargs)
+  File "renpy/common/00action_menu.rpy", line 271, in __call__
+    layout.yesno_screen(layout.QUIT, Quit(False))
+  File "renpy/common/00layout.rpy", line 517, in yesno_screen
+    elif renpy.invoke_in_new_context(layout.invoke_yesno_prompt, None, message):
+  File "renpy/game.py", line 301, in invoke_in_new_context
+    return callable(*args, **kwargs)
+  File "renpy/common/00layout.rpy", line 472, in invoke_yesno_prompt
+    rv = layout.yesno_prompt(*args)
+AttributeError: 'Layout' object has no attribute 'yesno_prompt'
 
-The game contains 58 dialogue blocks, containing 220 words and 1,747
-characters, for an average of 3.8 words and 30 characters per block.
-
-The game contains 5 menus, 1 images, and 2 screens.
-
-
-Lint is not a substitute for thorough testing. Remember to update Ren'Py
-before releasing. New releases fix bugs and improve compatibility.
+While running game code:
+  File "game/script.rpy", line 75, in script
+    system "Thank you for testing!"
+AttributeError: 'Layout' object has no attribute 'yesno_prompt'

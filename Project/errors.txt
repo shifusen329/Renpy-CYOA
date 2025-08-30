@@ -1,0 +1,10 @@
+﻿I'm sorry, but errors were detected in your script. Please correct the
+errors listed below, and try again.
+
+
+File "game/tts_settings_simple.rpy", line 43: The if statement is not a valid child of the textbutton statement.
+    text_idle_color "#ffffff" if tts_voice_selector.selected_voice == "af_sky" else "#aaaaaa"
+                                ^
+
+Ren'Py Version: Ren'Py 8.4.1.25072401
+Sat Aug 30 16:59:05 2025
