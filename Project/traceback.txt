@@ -1,0 +1,32 @@
+﻿I'm sorry, but an uncaught exception occurred.
+
+While running game code:
+KeyError: ('ivy', 'base')
+
+-- Full Traceback ------------------------------------------------------------
+
+Traceback (most recent call last):
+  File "renpy/bootstrap.py", line 376, in bootstrap
+    renpy.main.main()
+    ~~~~~~~~~~~~~~~^^
+  File "renpy/main.py", line 614, in main
+    run(restart)
+    ~~~^^^^^^^^^
+  File "renpy/main.py", line 92, in run
+    if not renpy.arguments.post_init():
+           ~~~~~~~~~~~~~~~~~~~~~~~~~^^ 
+  File "renpy/arguments.py", line 355, in post_init
+    return commands[command]()
+           ~~~~~~~~~~~~~~~~~^^
+  File "renpy/lint.py", line 1150, in lint
+    check_image(node)
+    ~~~~~~~~~~~^^^^^^
+  File "renpy/lint.py", line 380, in check_image
+    check_displayable("image %s" % name, renpy.display.image.images[node.imgname])
+                                         ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^ 
+KeyError: ('ivy', 'base')
+
+Linux-6.8.0-78-generic-x86_64-with-glibc2.35 x86_64
+Ren'Py 8.4.1.25072401
+ 
+Fri Aug 29 21:56:48 2025
