@@ -1,0 +1,17 @@
+.venv/
+tmp/
+doc/
+the_question/
+update/
+lib/
+gui/
+launcher/
+rapt/
+renpy/
+renpy.app/
+sdk-fonts/
+vscode/
+tutorial/
+archive/
+.env
+CubismSdkForNative-5-r.4.1.zip
